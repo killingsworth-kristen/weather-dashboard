@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <div class="flex">
+        <aside>
+            <h3>Search for a city in the US</h3>
+            <form>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state"><br>
+                <button id="search-button">Search</button>
+            </form>
+            <hr>
+            <div class="search-history"></div>
+        </aside>
+        <main>
+            <div class="title-card">
+                <h2 id="today-date">No search results</h2>
+                <p id="today-status"></p>
+                <p id="today-temp"></p>
+                <p id="today-wind"></p>
+                <p id="today-humidity"></p>
+            </div>
+            <h3>5 day forecast:</h3>
+            <div class="future-card-container hidden">
+                <div class="future-cards" id="day-1">
+                    <h5 id="day-1-date"></h5>
+                    <p id="day-1-status"></p>
+                    <p id="day-1-temp"></p>
+                    <p id="day-1-wind"></p>
+                    <p id="day-1-humidity"></p>
+                </div>
+                <div class="future-cards" id="day-2">
+                    <h5 id="day-2-date"></h5>
+                    <p id="day-2-status"></p>
+                    <p id="day-2-temp"></p>
+                    <p id="day-2-wind"></p>
+                    <p id="day-2-humidity"></p>
+                </div>
+                <div class="future-cards" id="day-3">
+                    <h5 id="day-3-date"></h5>
+                    <p id="day-3-status"></p>
+                    <p id="day-3-temp"></p>
+                    <p id="day-3-wind"></p>
+                    <p id="day-3-humidity"></p>
+                </div>
+                <div class="future-cards" id="day-4">
+                    <h5 id="day-4-date"></h5>
+                    <p id="day-4-status"></p>
+                    <p id="day-4-temp"></p>
+                    <p id="day-4-wind"></p>
+                    <p id="day-4-humidity"></p>
+                </div>
+                <div class="future-cards" id="day-5">
+                    <h5 id="day-5-date"></h5>
+                    <p id="day-5-status"></p>
+                    <p id="day-5-temp"></p>
+                    <p id="day-5-wind"></p>
+                    <p id="day-5-humidity"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

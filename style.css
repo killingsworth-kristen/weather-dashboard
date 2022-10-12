@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.flex {
+    display: flex;
+}
+
+/* header styling */
+header {
+    background: #038DCF;
+    color: white;
+    text-align: center;
+    width: 100vw;
+}
+
+h1 {
+    padding: 2%; 
+}
+/* search form and history styling */
+aside {
+    border: solid black;
+    width: 30%;
+}
+
+button {
+    background-color: #038DCF;
+    color: white;
+    width: 98%;
+    padding: 1%;
+    margin: 1%;
+}
+
+hr {
+    width: 98%;
+    margin: 1%;
+}
+/* main section styling (weather display) */
+main {
+    width: 70%;
+    border: solid black;
+}
+
+/* forecast card styling */
+.future-card-container {
+    display: flex;
+}
+
+.future-cards {
+    border: #038DCF;
+    background: #038DCF;
+    color: white;
+    padding: 1%;
+    margin: 1%;
+}
+
+.hidden {
+    display: none;
+}
