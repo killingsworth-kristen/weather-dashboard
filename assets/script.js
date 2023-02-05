@@ -47,6 +47,53 @@ var forecast5Humidity = document.getElementById("day-5-humidity");
 
 // adds search history buttons to page on page load
 saveButtons();
+
+// save form inputs to local storage and store on page
+function saveStorage () {
+    var history = JSON.parse(localStorage.getItem(`history`))|| [];
+    var cityInput = document.querySelector(`#city`).value;
+    var stateInput = document.querySelector(`#state`).value;
+    var userInput = {city: cityInput, state: stateInput}
+
+    var prevBtnsArr = document.getElementsByClassName(`history-button`)
+
+    let newBtn = true;
+    
+    function checkPrevBtns () {
+            if (prevBtnsArr.length === 0) {
+            return newBtn = true;
+        } 
+        let prevBtn = null;
+        for (let i = 0; i < prevBtnsArr.length; i++) {
+            prevBtn = prevBtnsArr[i]; 
+            if (prevBtn.id === `${cityInput}-${stateInput}`) {
+                console.log(`${prevBtn.id} = false`)
+                return newBtn = false;
+            } 
+        }  
+        console.log(`${prevBtn.id} = true`)
+        return newBtn = true;
+        
+    }
+
+    checkPrevBtns()
+
+    if (newBtn === true) {
+        var historyBtn = document.createElement(`button`)
+        historyBtn.setAttribute(`class`,`history-button`)
+        historyBtn.setAttribute(`id`,`${cityInput}-${stateInput}`)
+        historyBtn.textContent = `${cityInput}, ${stateInput}`
+        searchHistory.append(historyBtn)
+    
+        history.push(userInput)
+        localStorage.setItem(`history`, JSON.stringify(history))
+        history = JSON.parse(localStorage.getItem(`history`));
+    } else {
+        return;
+    }
+    
+}
+
 // on search button click, fetch weather data of form inputs 
 searchBtn.addEventListener(`click`, function (event) {
     event.preventDefault();
@@ -60,7 +107,7 @@ searchBtn.addEventListener(`click`, function (event) {
              return response.json();
         })
         .then (function (data) {
-            todayDateH2.textContent = "Today";
+            todayDateH2.textContent = `Today in ${cityInput}, ${stateInput}`;
             todayImg.setAttribute(`src`,`./assets/icons/${data.weather[0].icon}.png`)
             todayStatusP.textContent = data.weather[0].main;
             todayTempP.textContent = "Temperature: " + data.main.temp + "";
@@ -114,29 +161,13 @@ searchBtn.addEventListener(`click`, function (event) {
         })
 });
 
-// save form inputs to local storage and  store on page
-function saveStorage () {
-    var history = JSON.parse(localStorage.getItem(`history`))|| [];
-    var cityInput = document.querySelector(`#city`).value;
-    var stateInput = document.querySelector(`#state`).value;
-    var userInput = {city: cityInput, state: stateInput}
-
-    var historyBtn = document.createElement(`button`)
-    historyBtn.setAttribute(`id`,`history-button`)
-    historyBtn.textContent = `${cityInput}, ${stateInput}`
-    searchHistory.append(historyBtn)
-
-    history.push(userInput)
-    localStorage.setItem(`history`, JSON.stringify(history))
-    history = JSON.parse(localStorage.getItem(`history`));
-}
-
 // saves search history buttons on page
 function saveButtons () {
     var history = JSON.parse(localStorage.getItem(`history`))|| [];
     for (let i=0;i<history.length;i++) {
         var historyBtn = document.createElement(`button`)
-    historyBtn.setAttribute(`id`,`history-button`)
+    historyBtn.setAttribute(`class`,`history-button`)
+    historyBtn.setAttribute(`id`,`${history[i].city}-${history[i].state}`)
     historyBtn.textContent = `${history[i].city}, ${history[i].state}`
     searchHistory.append(historyBtn)
     } 
@@ -146,13 +177,12 @@ function saveButtons () {
 document.addEventListener(`click`,function(event) {
     var clicked = event.target;
     var history = JSON.parse(localStorage.getItem(`history`));
-    if (clicked.id === `history-button`) {
+    if (clicked.className === `history-button`) {
         for (let i=0;i<history.length;i++) {
             if (clicked.textContent.includes(`${history[i].city}`)) {
                 console.log(`clicked on ${history[i].city}`)
                 document.querySelector(`#city`).value = history[i].city
                 document.querySelector(`#state`).value = history[i].state
-                searchBtn.click()
             }
         }
     }
